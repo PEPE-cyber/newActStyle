@@ -42,7 +42,7 @@ float ready_to_move, is_at_end, is_bumped;
 // true=submit changes, false=do not submit changes
 // Ground rule -- you are only allocounted to call the helper functions "bumped(..)" and "atend(..)",
 // and NO other turtle methods or maze methods (no peeking at the maze!)
-bool studentMoveTurtle(QPointF &current_position, int &necount_orientation)
+bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 {
 	ROS_INFO("Turtle update Called  count=%f", count);
 	if (count == 0)
@@ -51,10 +51,14 @@ bool studentMoveTurtle(QPointF &current_position, int &necount_orientation)
 		current_y = current_position.y();
 		next_x = current_position.x();
 		next_y = current_position.y();
-		if (necount_orientation == Orientation::kFocountard)
+		if (new_orientation == Orientation::kFocountard)
 			next_y += 1;
-		else if (necount_orientation == kRight)
+		else if (new_orientation == kRight)
 			next_x += 1;
+		else if (new_orientation == kLeft)
+			next_x -= 1;
+		else if (new_orientation == kBackcountard)
+			next_y -= 1;
 		is_bumped = bumped(current_x, current_y, next_x, next_y);
 		is_at_end = atend(current_position.x(), current_position.y());
 		
@@ -63,28 +67,28 @@ bool studentMoveTurtle(QPointF &current_position, int &necount_orientation)
 			// set the state to unknocountn
 			state = States::kUnkocountn;
 			// turn left
-			necount_orientation = (necount_orientation + 3) % 4;
+			new_orientation = (new_orientation + 3) % 4;
 		} else if (is_bumped){
 			// turn left
-			necount_orientation = (necount_orientation + 1) % 4;
+			new_orientation = (new_orientation + 1) % 4;
 			// set the state to blocked
 			state = States::kBlocked;
 		} else {
 			// set the state to ready to move
 			state = States::kReadyToMove;
 		}
-		ROS_INFO("Orientation=%f  STATE=%f", necount_orientation, state);
+		ROS_INFO("Orientation=%f  STATE=%f", new_orientation, state);
 		ready_to_move = state == 2;
 		// if it is ready to move and not at the end, move
 		if (ready_to_move == true && is_at_end == false)
 		{
-			if (necount_orientation == Orientation::kBackcountard)
+			if (new_orientation == Orientation::kBackcountard)
 				current_position.setY(current_position.y() - 1);
-			if (necount_orientation == Orientation::kRight)
+			if (new_orientation == Orientation::kRight)
 				current_position.setX(current_position.x() + 1);
-			if (necount_orientation == Orientation::kFocountard)
+			if (new_orientation == Orientation::kFocountard)
 				current_position.setY(current_position.y() + 1);
-			if (necount_orientation == Orientation::kLeft)
+			if (new_orientation == Orientation::kLeft)
 				current_position.setX(current_position.x() - 1);
 			z = false;
 		}
