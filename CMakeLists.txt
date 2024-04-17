@@ -41,8 +41,8 @@ set(csrtle_node_HDRS
 # Replace ID with your own ID!
 set(csrtle_student_SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/student/ros_turtle_interface.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/student/ID_student_maze.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/student/ID_student_turtle.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/student/a0160480_student_maze.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/student/a016204080_student_turtle.cpp
   )
 
 # Build the monitors: each target must be in quotes.

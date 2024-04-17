@@ -1,8 +1,7 @@
 <launch>
 	<group ns="csrtle1">
 	       <node pkg="csrtle" name="sim" type="csrtle_node"/>
-	</group>
-	<group ns="csrtle2">
-	       <node pkg="csrtle" name="sim" type="csrtle_node"/>
+	       <node pkg="csrtle" name="student" type="csrtle_student"/>
+
 	</group>
 </launch>
