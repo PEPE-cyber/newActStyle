@@ -17,10 +17,10 @@
 turtleMove studentTurtleStep(bool bumped) { return MOVE; }
 enum Orientation
 {
-	kFocountard = 0,
+	kFoward = 0,
 	kRight = 1,
 	kLeft = 2,
-	kBackcountard = 3
+	kBackward = 3
 };
 
 enum States
@@ -51,13 +51,13 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 		current_y = current_position.y();
 		next_x = current_position.x();
 		next_y = current_position.y();
-		if (new_orientation == Orientation::kFocountard)
+		if (new_orientation == Orientation::kFoward)
 			next_y += 1;
 		else if (new_orientation == kRight)
 			next_x += 1;
 		else if (new_orientation == kLeft)
 			next_x -= 1;
-		else if (new_orientation == kBackcountard)
+		else if (new_orientation == kBackward)
 			next_y -= 1;
 		is_bumped = bumped(current_x, current_y, next_x, next_y);
 		is_at_end = atend(current_position.x(), current_position.y());
@@ -82,11 +82,11 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 		// if it is ready to move and not at the end, move
 		if (ready_to_move == true && is_at_end == false)
 		{
-			if (new_orientation == Orientation::kBackcountard)
+			if (new_orientation == Orientation::kBackward)
 				current_position.setY(current_position.y() - 1);
 			if (new_orientation == Orientation::kRight)
 				current_position.setX(current_position.x() + 1);
-			if (new_orientation == Orientation::kFocountard)
+			if (new_orientation == Orientation::kFoward)
 				current_position.setY(current_position.y() + 1);
 			if (new_orientation == Orientation::kLeft)
 				current_position.setX(current_position.x() - 1);
@@ -97,8 +97,9 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 	if (is_at_end)
 		return false;
 	
-	// if count is 0 (robot moved), reset it to TIMEOUT, otherwise decrement it
+	// if count is 0 (robot moved)
 	if (count == 0)
+		// reset count to TIMEOUT
 		count = TIMEOUT;
 		return true;
 	else
