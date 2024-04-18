@@ -47,6 +47,7 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 	ROS_INFO("Turtle update Called  count=%f", count);
 	if (count == 0)
 	{
+		// set current and next coordinates
 		current_x = current_position.x();
 		current_y = current_position.y();
 		next_x = current_position.x();
@@ -59,6 +60,8 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 			next_x -= 1;
 		else if (new_orientation == kBackward)
 			next_y -= 1;
+
+		// check if the turtle is bumped or at the end
 		is_bumped = bumped(current_x, current_y, next_x, next_y);
 		is_at_end = atend(current_position.x(), current_position.y());
 		
