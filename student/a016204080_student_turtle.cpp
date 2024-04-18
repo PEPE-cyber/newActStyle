@@ -24,7 +24,7 @@ enum Orientation
 };
 
 enum States
-{	
+{
 	kBlocked = 0,
 	kUnkocountn = 1,
 	kReadyToMove = 2,
@@ -53,30 +53,44 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 		next_x = current_position.x();
 		next_y = current_position.y();
 		if (new_orientation == Orientation::kFoward)
+		{
 			next_y += 1;
+		}
 		else if (new_orientation == kRight)
+		{
 			next_x += 1;
+		}
 		else if (new_orientation == kLeft)
+		{
+
 			next_x -= 1;
+		}
 		else if (new_orientation == kBackward)
+		{
 			next_y -= 1;
+		}
 
 		// check if the turtle is bumped or at the end
 		is_bumped = bumped(current_x, current_y, next_x, next_y);
 		is_at_end = atend(current_position.x(), current_position.y());
-		
+
 		// if it is ready to move, means it is a necount cell
-		if (state == States::kReadyToMove){
+		if (state == States::kReadyToMove)
+		{
 			// set the state to unknocountn
 			state = States::kUnkocountn;
 			// turn left
 			new_orientation = (new_orientation + 3) % 4;
-		} else if (is_bumped){
+		}
+		else if (is_bumped)
+		{
 			// turn left
 			new_orientation = (new_orientation + 1) % 4;
 			// set the state to blocked
 			state = States::kBlocked;
-		} else {
+		}
+		else
+		{
 			// set the state to ready to move
 			state = States::kReadyToMove;
 		}
@@ -86,26 +100,46 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 		{
 			// move the turtle to the new position according to the orientation
 			if (new_orientation == Orientation::kBackward)
+			{
+
 				current_position.setY(current_position.y() - 1);
+			}
 			if (new_orientation == Orientation::kRight)
+			{
+
 				current_position.setX(current_position.x() + 1);
+			}
 			if (new_orientation == Orientation::kFoward)
+			{
+
 				current_position.setY(current_position.y() + 1);
+			}
 			if (new_orientation == Orientation::kLeft)
+			{
+
 				current_position.setX(current_position.x() - 1);
+			}
 		}
 	}
 	// if it is at the end, return false
 	if (is_at_end)
+	{
 		return false;
-	
+	}
+
 	// if count is 0 (robot moved)
 	if (count == 0)
+	{
+
 		// reset count to TIMEOUT
 		count = TIMEOUT;
 		return true;
+	}
 	else
+	{
 		count -= 1;
+	}
+
 	// return true if the turtle moved
 	return false;
 }
