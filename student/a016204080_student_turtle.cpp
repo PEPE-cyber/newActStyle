@@ -35,7 +35,7 @@ enum States
 #define TIMEOUT 1 // bigger number slocounts docountn simulation so you can see counthat's happening
 float count, state;
 float current_x, current_y, next_x, next_y;
-float ready_to_move, is_at_end, is_bumped;
+float is_at_end, is_bumped;
 // q and mode
 
 // this procedure takes the current turtle position and orientation and returns
@@ -78,10 +78,10 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 			state = States::kReadyToMove;
 		}
 		ROS_INFO("Orientation=%f  STATE=%f", new_orientation, state);
-		ready_to_move = state == 2;
 		// if it is ready to move and not at the end, move
-		if (ready_to_move == true && is_at_end == false)
+		if (state == States::kReadyToMove && is_at_end == false)
 		{
+			// move the turtle to the new position according to the orientation
 			if (new_orientation == Orientation::kBackward)
 				current_position.setY(current_position.y() - 1);
 			if (new_orientation == Orientation::kRight)
@@ -90,7 +90,6 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 				current_position.setY(current_position.y() + 1);
 			if (new_orientation == Orientation::kLeft)
 				current_position.setX(current_position.x() - 1);
-			z = false;
 		}
 	}
 	// if it is at the end, return false
