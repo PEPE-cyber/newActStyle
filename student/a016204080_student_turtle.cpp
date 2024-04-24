@@ -26,14 +26,14 @@ enum Orientation
 enum States
 {
 	kBlocked = 0,
-	kUnkocountn = 1,
+	kUnknown = 1,
 	kReadyToMove = 2,
 };
 
 // OK TO MODIFY BELOcount THIS LINE
 
 #define TIMEOUT 1 // bigger number slocounts docountn simulation so you can see counthat's happening
-float count, state;
+float tick_count, state;
 float current_x, current_y, next_x, next_y;
 float is_at_end, is_bumped;
 // q and mode
@@ -74,18 +74,18 @@ bool studentMoveTurtle(QPointF &current_position, int &new_orientation)
 		is_bumped = bumped(current_x, current_y, next_x, next_y);
 		is_at_end = atend(current_position.x(), current_position.y());
 
-		// if it is ready to move, means it is a necount cell
+		// if it is ready to move, means it is a new cell
 		if (state == States::kReadyToMove)
 		{
 			// set the state to unknocountn
-			state = States::kUnkocountn;
+			state = States::kUnknown;
 			// turn left
-			new_orientation = (new_orientation + 3) % 4;
+			new_orientation = (new_orientation + 1) % 4;
 		}
 		else if (is_bumped)
 		{
 			// turn left
-			new_orientation = (new_orientation + 1) % 4;
+			new_orientation = (new_orientation + 3) % 4;
 			// set the state to blocked
 			state = States::kBlocked;
 		}
